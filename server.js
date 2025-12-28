@@ -13,7 +13,7 @@ const io = socketIO(server, {
   }
 });
 
-const PORT = 8080;
+const PORT = 3000;
 
 // 静态文件服务
 app.use(express.static('public'));
