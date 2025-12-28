@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局域网P2P文件传输</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📡 局域网P2P文件传输</h1>
+            <p class="subtitle">点对点直接传输，服务器不保存文件</p>
+        </header>
+
+        <div class="user-section">
+            <div class="user-info">
+                <label>你的昵称:</label>
+                <input type="text" id="usernameInput" placeholder="输入昵称" maxlength="20">
+                <button id="joinBtn" class="btn-join">加入房间</button>
+            </div>
+            <div id="currentUser" style="display: none;">
+                <span class="status-online">● 在线</span>
+                <span id="currentUsername"></span>
+            </div>
+        </div>
+
+        <div class="main-content" id="mainContent" style="display: none;">
+            <div class="users-panel">
+                <h2>👥 在线用户 (<span id="userCount">0</span>)</h2>
+                <div class="users-list" id="usersList">
+                    <div class="empty-state">暂无其他用户</div>
+                </div>
+            </div>
+
+            <div class="transfer-panel">
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📤</div>
+                        <p class="upload-text">选择要发送的文件</p>
+                        <p class="upload-hint">选择文件后，点击在线用户进行发送</p>
+                        <input type="file" id="fileInput" hidden>
+                    </div>
+
+                    <div id="fileSelected" style="display: none;" class="file-selected">
+                        <div class="selected-file-info">
+                            <span class="file-icon">📄</span>
+                            <div>
+                                <div class="file-name" id="selectedFileName"></div>
+                                <div class="file-meta" id="selectedFileSize"></div>
+                            </div>
+                        </div>
+                        <button class="btn-clear" id="clearFileBtn">✕</button>
+                    </div>
+                </div>
+
+                <div class="transfer-status" id="transferStatus" style="display: none;">
+                    <div class="status-header">
+                        <h3 id="statusTitle">传输中...</h3>
+                        <button class="btn-cancel" id="cancelBtn">取消</button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                    <div class="status-info" id="statusInfo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="receiveModal" style="display: none;">
+        <div class="modal-content">
+            <h2>📥 收到文件传输请求</h2>
+            <div class="modal-body">
+                <p><strong>发送者:</strong> <span id="senderName"></span></p>
+                <p><strong>文件名:</strong> <span id="receiveFileName"></span></p>
+                <p><strong>文件大小:</strong> <span id="receiveFileSize"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-accept" id="acceptBtn">接受</button>
+                <button class="btn btn-reject" id="rejectBtn">拒绝</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
